@@ -15,7 +15,7 @@
             background-color: #f0f2f5;
             margin: 0;
             padding: 0;
-            font-size: 20px; /* Increased font size */
+            font-size: 18px;
         }
         /* Landing Page Styles */
         .landing-page {
@@ -32,25 +32,24 @@
             box-sizing: border-box;
         }
         .landing-page h1 {
-            font-size: 3rem; /* Increased font size */
+            font-size: 2.5rem;
             margin-bottom: 20px;
         }
         .landing-page p {
-            font-size: 1.5rem; /* Increased font size */
+            font-size: 1.3rem;
             margin-bottom: 40px;
             max-width: 600px;
         }
         .landing-page button {
-            padding: 20px 45px;
-            font-size: 1.8rem; /* Increased font size */
+            padding: 18px 40px;
+            font-size: 1.6rem;
             background-color: #ffffff;
             color: #4a90e2;
             border: none;
             border-radius: 50px;
             cursor: pointer;
             transition: background-color 0.3s ease;
-            font-family: 'Kanit', sans-serif;
-            font-weight: bold;
+            font-family: 'Kanit', sans-serif; /* เพิ่มฟอนต์ให้ปุ่ม */
         }
         .landing-page button:hover {
             background-color: #e0e0e0;
@@ -63,7 +62,8 @@
             padding: 30px;
             border-radius: 8px;
             box-sizing: border-box;
-            display: none;
+            display: none; /* ซ่อน container โดยเริ่มต้น */
+            position: relative;
         }
         h1, h2, h3 {
             color: #333333;
@@ -71,7 +71,7 @@
         }
         h1 {
             text-align: center;
-            font-size: 2.5rem; /* Increased font size */
+            font-size: 2.2rem;
             margin-bottom: 30px;
         }
         label {
@@ -79,34 +79,32 @@
             margin-top: 20px;
             font-weight: 600;
             color: #555555;
-            font-size: 1.3rem; /* Increased font size */
+            font-size: 1.1rem;
         }
         input[type="text"], select {
             width: 100%;
-            padding: 16px; /* Increased padding */
+            padding: 14px;
             margin-top: 8px;
             border: 1px solid #cccccc;
             border-radius: 4px;
             box-sizing: border-box;
-            font-size: 1.2rem; /* Increased font size */
+            font-size: 1.1rem;
         }
         .info {
-            font-size: 1.1rem; /* Increased font size */
+            font-size: 1rem;
             color: #777777;
         }
         button {
             margin-top: 30px;
-            width: 100%;
-            padding: 20px; /* Increased padding */
+            padding: 18px;
             background-color: #007bff;
             color: #ffffff;
             border: none;
             border-radius: 50px;
-            font-size: 1.8rem; /* Increased font size */
+            font-size: 1.6rem;
             cursor: pointer;
             transition: background-color 0.3s ease;
-            font-family: 'Kanit', sans-serif;
-            font-weight: bold;
+            font-family: 'Kanit', sans-serif; /* เพิ่มฟอนต์ให้ปุ่ม */
         }
         button:hover {
             background-color: #0056b3;
@@ -131,25 +129,24 @@
         .section-stimulus {
             background-color: #e8daef;
         }
-        .step {
+        .step-content {
             display: none;
         }
-        .step.active {
+        .step-content.active {
             display: block;
         }
         .navigation-buttons {
             display: flex;
-            flex-direction: column;
-            gap: 15px;
+            justify-content: space-between;
             margin-top: 30px;
         }
         .navigation-buttons button {
-            width: 100%;
-            font-family: 'Kanit', sans-serif;
+            width: 48%;
+            font-family: 'Kanit', sans-serif; /* เพิ่มฟอนต์ให้ปุ่มใน navigation */
         }
         .error {
             color: red;
-            font-size: 1rem; /* Increased font size */
+            font-size: 0.9rem;
             margin-left: 10px;
         }
         input[type="checkbox"] {
@@ -160,55 +157,28 @@
             display: flex;
             align-items: center;
             margin-top: 10px;
-            font-size: 1.3rem; /* Increased font size */
+            font-size: 1.1rem;
         }
         /* Result Section */
-        #result-section {
-            display: none;
-        }
-        #result-section h2 {
+        .step-content#step-4 h2 {
             color: #28a745;
-            font-size: 2.5rem; /* Increased font size */
+            font-size: 2rem;
             margin-top: 0;
         }
-        #result-section p {
-            font-size: 1.5rem; /* Increased font size */
+        .step-content#step-4 p {
+            font-size: 1.3rem;
             color: #333333;
         }
-        #result-section .tax-amount {
-            font-size: 2.5rem; /* Increased font size */
+        .step-content#step-4 .tax-amount {
+            font-size: 2.2rem;
             color: #d9534f;
             font-weight: bold;
         }
         /* Style for Effective Tax Rate */
-        #result-section .effective-tax-rate {
-            font-size: 2.5rem; /* Increased font size */
+        .step-content#step-4 .effective-tax-rate {
+            font-size: 2.2rem;
             color: #28a745; /* Green color */
             font-weight: bold;
-        }
-        /* Gauge Styles */
-        .gauge-container {
-            margin-top: 30px;
-            text-align: center;
-        }
-        .gauge {
-            width: 100%;
-            background-color: #e9ecef;
-            border-radius: 8px;
-            overflow: hidden;
-            position: relative;
-            height: 30px;
-            margin-bottom: 20px;
-        }
-        .gauge-fill {
-            background-color: #28a745;
-            height: 100%;
-            text-align: right;
-            line-height: 30px;
-            color: #fff;
-            font-weight: bold;
-            padding-right: 10px;
-            box-sizing: border-box;
         }
         /* Button to encourage more investment */
         .investment-button {
@@ -218,11 +188,11 @@
             color: #212529;
             border: none;
             border-radius: 50px;
-            font-size: 1.5rem; /* Increased font size */
+            font-size: 1.3rem;
             cursor: pointer;
             transition: background-color 0.3s ease;
             font-family: 'Kanit', sans-serif;
-            font-weight: bold;
+            width: 100%;
         }
         .investment-button:hover {
             background-color: #e0a800;
@@ -246,26 +216,88 @@
             padding: 30px;
             border: 1px solid #888;
             width: 80%;
-            max-width: 600px;
+            max-width: 500px;
             border-radius: 8px;
             text-align: center;
         }
         .modal-content h2 {
             margin-top: 0;
-            font-size: 2rem; /* Increased font size */
         }
         .modal-content ul {
             text-align: left;
             padding-left: 20px;
-            font-size: 1.2rem; /* Increased font size */
         }
         .modal-content button {
             width: auto;
-            padding: 12px 25px;
-            font-size: 1.5rem; /* Increased font size */
+            padding: 10px 20px;
+            font-size: 1.2rem;
             margin-top: 20px;
             border-radius: 50px;
-            font-weight: bold;
+        }
+        #recommended-investments {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #f0f8ff;
+            border-radius: 8px;
+        }
+        #recommended-investments h3 {
+            color: #007bff;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        #recommended-investments p {
+            font-size: 1.2rem;
+            color: #333333;
+        }
+        /* Stepper Styles */
+        .stepper {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        .stepper::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 10%;
+            right: 10%;
+            height: 4px;
+            background-color: #e0e0e0;
+            z-index: 1;
+        }
+        .stepper-step {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            flex: 1;
+            text-align: center;
+        }
+        .stepper-step:not(:last-child) {
+            /* margin-right: 20px; */
+        }
+        .stepper-step-circle {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .stepper-step.active .stepper-step-circle,
+        .stepper-step:hover .stepper-step-circle {
+            background-color: #007bff;
+            color: #ffffff;
+        }
+        .stepper-step-label {
+            font-size: 0.9rem;
+            color: #555555;
         }
         /* Responsive Design */
         @media (max-width: 768px) {
@@ -274,36 +306,39 @@
                 margin: 20px auto;
             }
             h1 {
-                font-size: 2.3rem;
+                font-size: 2rem;
             }
             button {
-                font-size: 1.7rem;
+                font-size: 1.5rem;
             }
             label {
-                font-size: 1.2rem;
+                font-size: 1rem;
             }
             input[type="text"], select {
-                font-size: 1.1rem;
+                font-size: 1rem;
             }
             .checkbox-group {
-                font-size: 1.2rem;
+                font-size: 1rem;
             }
             .info {
-                font-size: 1rem;
+                font-size: 0.9rem;
+            }
+            .stepper-step-label {
+                font-size: 0.8rem;
             }
         }
         @media (max-width: 480px) {
             body {
-                font-size: 18px;
+                font-size: 16px;
             }
             .container {
                 padding: 15px;
             }
             h1 {
-                font-size: 2rem;
+                font-size: 1.8rem;
             }
             button {
-                font-size: 1.5rem;
+                font-size: 1.3rem;
             }
             .navigation-buttons {
                 flex-direction: column;
@@ -311,81 +346,10 @@
             .navigation-buttons button {
                 width: 100%;
             }
-        }
-        /* New Section Styles */
-        #adjustment-section {
-            display: none;
-        }
-        #adjustment-section h2 {
-            color: #17a2b8;
-            font-size: 2.5rem;
-            margin-top: 0;
-        }
-        #adjustment-section p {
-            font-size: 1.5rem;
-            color: #333333;
-        }
-        .comparison {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-            flex-wrap: wrap;
-        }
-        .comparison div {
-            width: 48%;
-            background-color: #f8f9fa;
-            padding: 20px;
-            border-radius: 8px;
-            box-sizing: border-box;
-            margin-bottom: 20px;
-        }
-        .comparison h3 {
-            font-size: 1.8rem;
-            margin-top: 0;
-        }
-        .tax-difference {
-            font-size: 2rem;
-            font-weight: bold;
-        }
-        .tax-increase {
-            color: #dc3545;
-        }
-        .tax-decrease {
-            color: #28a745;
-        }
-        .tax-before {
-            color: #007bff; /* Blue color */
-        }
-        .tax-after {
-            color: #28a745; /* Green color */
-        }
-        .slider-container {
-            margin-top: 20px;
-        }
-        .slider-container label {
-            font-size: 1.3rem;
-        }
-        .slider-container input[type="range"] {
-            width: 100%;
-            margin-top: 10px;
-        }
-        .slider-value {
-            font-size: 1.3rem;
-            margin-top: 10px;
-            text-align: right;
-        }
-        .input-group {
-            display: flex;
-            align-items: center;
-            margin-top: 10px;
-        }
-        .input-group input[type="number"] {
-            width: 100%;
-            padding: 12px;
-            font-size: 1.2rem;
-            margin-left: 10px;
-            border: 1px solid #cccccc;
-            border-radius: 4px;
+            .stepper::before {
+                left: 5%;
+                right: 5%;
+            }
         }
     </style>
 </head>
@@ -395,15 +359,35 @@
     <div class="landing-page" id="landing-page">
         <h1>ยินดีต้อนรับสู่โปรแกรมคำนวณภาษี ปี 2567</h1>
         <p>เครื่องมือที่ช่วยคุณคำนวณภาษีเงินได้บุคคลธรรมดาอย่างง่ายดายและรวดเร็ว เพียงกรอกข้อมูลไม่กี่ขั้นตอน</p>
-        <button onclick="startCalculator()">เริ่มต้นคำนวณ</button>
+        <button type="button" onclick="startCalculator()">เริ่มต้นคำนวณ</button>
     </div>
 
     <!-- Main Container -->
     <div class="container" id="main-container">
-        <h1>โปรแกรมคำนวณภาษีเงินได้บุคคลธรรมดา ปี 2567</h1>
+        <h1>โปรแกรมคำนวณภาษีเงินได้บุคคลธรรมดา  ปี 2567</h1>
+
+        <!-- Stepper (Progress Gauge) -->
+        <div class="stepper" id="stepper">
+            <div class="stepper-step active" data-step="1">
+                <div class="stepper-step-circle">1</div>
+                <div class="stepper-step-label">ขั้นตอนที่ 1: รายได้</div>
+            </div>
+            <div class="stepper-step" data-step="2">
+                <div class="stepper-step-circle">2</div>
+                <div class="stepper-step-label">ขั้นตอนที่ 2: ค่าใช้จ่าย</div>
+            </div>
+            <div class="stepper-step" data-step="3">
+                <div class="stepper-step-circle">3</div>
+                <div class="stepper-step-label">ขั้นตอนที่ 3: ค่าลดหย่อน</div>
+            </div>
+            <div class="stepper-step" data-step="4">
+                <div class="stepper-step-circle">4</div>
+                <div class="stepper-step-label">สรุปผลการคำนวณ</div>
+            </div>
+        </div>
 
         <!-- Step 1: รายได้ -->
-        <div class="step active" id="step-1">
+        <div class="step-content active" id="step-1">
             <h2>ขั้นตอนที่ 1: รายได้</h2>
 
             <label>เลือกรูปแบบการกรอกข้อมูลรายได้:</label>
@@ -436,24 +420,25 @@
             <div class="info">กรุณากรอกเฉพาะตัวเลข สามารถเว้นว่างได้หากไม่มีรายได้อื่น ๆ</div>
 
             <div class="navigation-buttons">
-                <button onclick="nextStep(1)">ถัดไป</button>
+                <button type="button" onclick="prevStep(1)" disabled>ย้อนกลับ</button>
+                <button type="button" onclick="nextStep(1)">ถัดไป</button>
             </div>
         </div>
 
         <!-- Step 2: ค่าใช้จ่าย -->
-        <div class="step" id="step-2">
+        <div class="step-content" id="step-2">
             <h2>ขั้นตอนที่ 2: ค่าใช้จ่าย</h2>
             <p>ค่าใช้จ่ายหักเหมา 50% แต่ไม่เกิน 100,000 บาท จากรายได้รวมของคุณ</p>
             <p>ค่าใช้จ่ายที่หักได้ของคุณคือ: <span id="expense_display">0</span> บาท</p>
 
             <div class="navigation-buttons">
-                <button onclick="prevStep(2)">ย้อนกลับ</button>
-                <button onclick="nextStep(2)">ถัดไป</button>
+                <button type="button" onclick="prevStep(2)">ย้อนกลับ</button>
+                <button type="button" onclick="nextStep(2)">ถัดไป</button>
             </div>
         </div>
 
         <!-- Step 3: ค่าลดหย่อน -->
-        <div class="step" id="step-3">
+        <div class="step-content" id="step-3">
             <h2>ขั้นตอนที่ 3: ค่าลดหย่อน</h2>
 
             <!-- Part 1: ค่าลดหย่อนภาษีส่วนตัวและครอบครัว -->
@@ -489,22 +474,22 @@
 
                 <label>บิดามารดาของคุณที่อายุมากกว่า 60 ปี และมีรายได้ไม่เกิน 30,000 บาทต่อปี:</label>
                 <div class="checkbox-group">
-                <input type="checkbox" id="your_father">
-                <label for="your_father">บิดาของคุณ</label>
+                    <input type="checkbox" id="your_father">
+                    <label for="your_father">บิดาของคุณ</label>
                 </div>
                 <div class="checkbox-group">
-                <input type="checkbox" id="your_mother">
-                <label for="your_mother">มารดาของคุณ</label>
+                    <input type="checkbox" id="your_mother">
+                    <label for="your_mother">มารดาของคุณ</label>
                 </div>
             
                 <label>บิดามารดาของคู่สมรสที่อายุมากกว่า 60 ปี และมีรายได้ไม่เกิน 30,000 บาทต่อปี:</label>
                 <div class="checkbox-group">
-                <input type="checkbox" id="spouse_father">
-                <label for="spouse_father">บิดาของคู่สมรส</label>
+                    <input type="checkbox" id="spouse_father">
+                    <label for="spouse_father">บิดาของคู่สมรส</label>
                 </div>
                 <div class="checkbox-group">
-                <input type="checkbox" id="spouse_mother">
-                <label for="spouse_mother">มารดาของคู่สมรส</label>
+                    <input type="checkbox" id="spouse_mother">
+                    <label for="spouse_mother">มารดาของคู่สมรส</label>
                 </div>
 
                 <label>จำนวนผู้พิการหรือทุพพลภาพที่คุณอุปการะ:</label>
@@ -556,7 +541,7 @@
                 <label>เบี้ยประกันชีวิตแบบบำนาญ (บาท):</label>
                 <input type="text" id="pension_insurance" value="0" inputmode="decimal">
                 <span class="error" id="pension_insurance_error"></span>
-                <div class="info">ลดหย่อนได้ 15% ของเงินได้ สูงสุดไม่เกิน 200,000 บาท</div>
+                <div class="info">ลดหย่อนได้ตามที่จ่ายจริง สูงสุดไม่เกิน 100,000 บาท</div>
 
                 <label>กองทุนรวมเพื่อการออม (SSF) (บาท):</label>
                 <input type="text" id="ssf" value="0" inputmode="decimal">
@@ -631,98 +616,37 @@
             </div>
 
             <div class="navigation-buttons">
-                <button onclick="prevStep(3)">ย้อนกลับ</button>
-                <button onclick="calculateTax()">คำนวณภาษี</button>
+                <button type="button" onclick="prevStep(3)">ย้อนกลับ</button>
+                <button type="button" onclick="calculateTax()">คำนวณภาษี</button>
             </div>
         </div>
 
-        <!-- Result Section -->
-<div id="result-section">
-    <h2>สรุปผลการคำนวณ</h2>
-    <p><strong>รายได้ทั้งปี:</strong> <span id="result_total_income">0</span> บาท</p>
-    <p><strong>ค่าใช้จ่ายที่หักได้:</strong> <span id="result_expense">0</span> บาท</p>
-    <p><strong>ค่าลดหย่อน:</strong> <span id="result_deductions">0</span> บาท</p>
-    <p><strong>เงินได้สุทธิ:</strong> <span id="result_net_income">0</span> บาท</p>
-    <p><strong>ภาษีที่ต้องชำระ:</strong> <span class="tax-amount" id="result_tax">0 บาท</span></p>
-    <!-- Added Effective Tax Rate with styling -->
-    <p><strong>อัตราภาษีที่แท้จริง (Effective Tax Rate):</strong> <span class="effective-tax-rate" id="result_effective_tax_rate">0%</span></p>
-    
-    <!-- Gauge Section -->
-    <div class="gauge-container">
-        <h3>การใช้สิทธิลดหย่อน</h3>
-        
-        <!-- Retirement Funds Gauge -->
-        <p><strong>กองทุนเพื่อการเกษียณ (SSF, RMF, PVD, กอช., ประกันบำนาญ)</strong></p>
-        <div class="gauge">
-            <div class="gauge-fill" id="gauge_retirement_fill" style="width: 0%;">0%</div>
+        <!-- Step 4: Result Section -->
+        <div class="step-content" id="step-4" style="display: none;">
+            <h2>สรุปผลการคำนวณ</h2>
+            <p><strong>รายได้ทั้งปี:</strong> <span id="result_total_income">0</span> บาท</p>
+            <p><strong>ค่าใช้จ่ายที่หักได้:</strong> <span id="result_expense">0</span> บาท</p>
+            <p><strong>ค่าลดหย่อน:</strong> <span id="result_deductions">0</span> บาท</p>
+            <p><strong>เงินได้สุทธิ:</strong> <span id="result_net_income">0</span> บาท</p>
+            <p><strong>ภาษีที่ต้องชำระ:</strong> <span class="tax-amount" id="result_tax">0 บาท</span></p>
+            <!-- Added Effective Tax Rate with styling -->
+            <p><strong>อัตราภาษีที่แท้จริง (Effective Tax Rate):</strong> <span class="effective-tax-rate" id="result_effective_tax_rate">0%</span></p>
+            
+            <!-- Add Recommended Investment Amounts for Maximum Deductions -->
+            <div id="recommended-investments">
+                <h3>คำแนะนำการซื้อเพื่อสิทธิ์ลดหย่อนเพิ่มเติม</h3>
+                <p><strong>SSF ที่ซื้อได้สูงสุด:</strong> <span id="max_ssf">0</span></p>
+                <p><strong>RMF ที่ซื้อได้สูงสุด:</strong> <span id="max_rmf">0</span></p>
+                <p><strong>Thai ESG ที่ซื้อได้สูงสุด:</strong> <span id="max_thaiesg">0</span></p>
+                <!-- Changed Investment Button Label and Always Visible -->
+                <button type="button" id="investment_button" class="investment-button" onclick="goToInvestmentSection()">ลงทุน SSF RMF ThaiESG เพิ่ม เพื่อประหยัดภาษีให้มากขึ้น</button>
+            </div>
+
+            <div class="navigation-buttons">
+                <button type="button" onclick="editData()">แก้ไขข้อมูล</button>
+                <button type="button" onclick="resetData()">เริ่มใหม่</button>
+            </div>
         </div>
-
-        <!-- Thai ESG Gauge -->
-        <p><strong>กองทุนรวมไทยเพื่อความยั่งยืน (Thai ESG)</strong></p>
-        <div class="gauge">
-            <div class="gauge-fill" id="gauge_thaiesg_fill" style="width: 0%;">0%</div>
-        </div>
-
-        <!-- Life Insurance Gauge -->
-        <p><strong>เบี้ยประกันชีวิตและประกันสะสมทรัพย์</strong></p>
-        <div class="gauge">
-            <div class="gauge-fill" id="gauge_insurance_fill" style="width: 0%;">0%</div>
-        </div>
-
-        <!-- Investment Button -->
-        <button id="investment_button" class="investment-button" style="display: none;" onclick="goToAdjustmentSection()"><strong>ซื้อ RMF SSF หรือ ThaiESG เพิ่ม เพื่อลดหย่อนให้มากขึ้น</strong></button>
-    </div>
-
-    <div class="navigation-buttons">
-        <button onclick="editData()">แก้ไขข้อมูล</button>
-        <button onclick="resetData()">เริ่มใหม่</button>
-    </div>
-</div>
-
-        <!-- Adjustment Section -->
-<div id="adjustment-section" style="display: none;">
-    <h2>ปรับค่าลดหย่อนการลงทุน</h2>
-    <p>คุณสามารถปรับค่าลดหย่อนการลงทุนเพื่อดูผลกระทบต่อภาษีที่ต้องชำระ</p>
-
-    <div class="comparison">
-        <div>
-            <h3>ก่อนปรับ</h3>
-            <p>ภาษีที่ต้องชำระ: <span class="tax-amount tax-before" id="before_tax_amount">0 บาท</span></p>
-        </div>
-        <div>
-            <h3>หลังปรับ</h3>
-            <p>ภาษีที่ต้องชำระ: <span class="tax-amount tax-after" id="after_tax_amount">0 บาท</span></p>
-        </div>
-    </div>
-
-    <div class="slider-container">
-        <label>กองทุนรวมเพื่อการออม (SSF):</label>
-        <input type="range" id="adjust_ssf" min="0" step="1000" oninput="updateAdjustmentValues()">
-        <input type="text" id="adjust_ssf_value" inputmode="decimal" oninput="updateAdjustmentValues()">
-        <div class="info">ยอดคงเหลือที่ลงทุนได้เพิ่ม: <span id="ssf_remaining_amount">0 บาท</span></div>
-
-        <label>กองทุนรวมเพื่อการเลี้ยงชีพ (RMF):</label>
-        <input type="range" id="adjust_rmf" min="0" step="1000" oninput="updateAdjustmentValues()">
-        <input type="text" id="adjust_rmf_value" inputmode="decimal" oninput="updateAdjustmentValues()">
-        <div class="info">ยอดคงเหลือที่ลงทุนได้เพิ่ม: <span id="rmf_remaining_amount">0 บาท</span></div>
-
-        <label>กองทุนรวมไทยเพื่อความยั่งยืน (Thai ESG):</label>
-        <input type="range" id="adjust_thaiesg" min="0" step="1000" oninput="updateAdjustmentValues()">
-        <input type="text" id="adjust_thaiesg_value" inputmode="decimal" oninput="updateAdjustmentValues()">
-        <div class="info">ยอดคงเหลือที่ลงทุนได้เพิ่ม: <span id="thaiesg_remaining_amount">0 บาท</span></div>
-
-        <label>เบี้ยประกันชีวิตและประกันสะสมทรัพย์:</label>
-        <input type="range" id="adjust_life_insurance" min="0" step="1000" oninput="updateAdjustmentValues()">
-        <input type="text" id="adjust_life_insurance_value" inputmode="decimal" oninput="updateAdjustmentValues()">
-        <div class="info">ยอดคงเหลือที่ลงทุนได้เพิ่ม: <span id="life_insurance_remaining_amount">0 บาท</span></div>
-    </div>
-
-    <div class="navigation-buttons">
-        <button onclick="applyAdjustments()">นำไปคำนวณภาษี</button>
-        <button onclick="cancelAdjustments()">ยกเลิก</button>
-    </div>
-</div>
-
     </div>
 
     <!-- Modal for Error Messages -->
@@ -730,28 +654,25 @@
         <div class="modal-content">
             <h2>พบข้อผิดพลาด</h2>
             <ul id="errorList"></ul>
-            <button onclick="closeErrorModal()">รับทราบ</button>
+            <button type="button" onclick="closeErrorModal()">รับทราบ</button>
         </div>
     </div>
 
     <!-- JavaScript -->
     <script>
-        // ตัวแปรสำหรับเก็บข้อมูล
-        let total_income = 0;
-        let expense = 0;
-        let before_tax = 0;
-        let after_tax = 0;
-        let total_personal_deductions = 0;
-        let total_stimulus_deductions = 0;
-        let total_donation_deductions = 0;
-        let insurance_total = 0;
-
         // ฟังก์ชันสำหรับเริ่มโปรแกรมคำนวณ
         function startCalculator() {
             document.getElementById('landing-page').style.display = 'none';
             document.getElementById('main-container').style.display = 'block';
-            window.scrollTo(0, 0);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
+
+        // ตัวแปรสำหรับเก็บข้อมูล
+        let total_income = 0;
+        let expense = 0;
+
+        // Retirement Deduction Variables
+        const retirementFields = ['pension_insurance', 'pvd', 'rmf', 'nsf', 'ssf'];
 
         // ฟังก์ชันสำหรับแสดงผลคอมม่าในตัวเลข
         function formatNumber(num) {
@@ -904,28 +825,27 @@
                 // แสดงผลค่าใช้จ่ายที่หักได้
                 document.getElementById('expense_display').innerText = formatNumber(expense);
 
+                // Update stepper to step 2
+                setActiveStep(2);
+
                 // ไปยังขั้นตอนที่ 2
-                document.getElementById('step-1').classList.remove('active');
-                document.getElementById('step-2').classList.add('active');
-                window.scrollTo(0, 0);
+                showStep(2);
             } else if (currentStep === 2) {
                 // ไปยังขั้นตอนที่ 3
-                document.getElementById('step-2').classList.remove('active');
-                document.getElementById('step-3').classList.add('active');
-                window.scrollTo(0, 0);
+                setActiveStep(3);
+                showStep(3);
             }
         }
 
         // ฟังก์ชันสำหรับย้อนกลับไปยังขั้นตอนก่อนหน้า
+        // Created by Suntiphab Vareenitisakul, 3031, WB-PIC
         function prevStep(currentStep) {
             if (currentStep === 2) {
-                document.getElementById('step-2').classList.remove('active');
-                document.getElementById('step-1').classList.add('active');
-                window.scrollTo(0, 0);
+                setActiveStep(1);
+                showStep(1);
             } else if (currentStep === 3) {
-                document.getElementById('step-3').classList.remove('active');
-                document.getElementById('step-2').classList.add('active');
-                window.scrollTo(0, 0);
+                setActiveStep(2);
+                showStep(2);
             }
         }
 
@@ -964,18 +884,33 @@
         // เรียกใช้ฟังก์ชันเมื่อโหลดหน้าเสร็จ
         window.onload = function() {
             populateChildrenOptions();
-            addAdjustmentEventListeners();
-            addCommaEventToAdjustmentInputs();
 
             // การแสดงผลส่วนของค่าลดหย่อนเพิ่มเติม
             document.getElementById('has_insurance').addEventListener('change', function() {
                 document.getElementById('insurance_section').style.display = this.checked ? 'block' : 'none';
+                updateRecommendedInvestments();
             });
             document.getElementById('has_donation').addEventListener('change', function() {
                 document.getElementById('donation_section').style.display = this.checked ? 'block' : 'none';
+                updateRecommendedInvestments();
             });
             document.getElementById('has_stimulus').addEventListener('change', function() {
                 document.getElementById('stimulus_section').style.display = this.checked ? 'block' : 'none';
+                updateRecommendedInvestments();
+            });
+
+            // Add event listeners to retirement deduction fields for real-time updates
+            retirementFields.forEach(function(field) {
+                document.getElementById(field).addEventListener('input', updateRetirementDeductions);
+            });
+
+            // Add event listeners to stepper steps for navigation
+            const stepperSteps = document.querySelectorAll('.stepper .stepper-step');
+            stepperSteps.forEach(function(step) {
+                step.addEventListener('click', function() {
+                    const targetStep = parseInt(this.getAttribute('data-step'));
+                    navigateToStep(targetStep);
+                });
             });
         };
 
@@ -1041,16 +976,15 @@
             }
             social_security = Math.min(social_security, 9000);
 
-            total_personal_deductions = personal_allowance + spouse_allowance + child_allowance + parents_allowance + disabled_allowance + social_security;
+            let total_personal_deductions = personal_allowance + spouse_allowance + child_allowance + parents_allowance + disabled_allowance + social_security;
 
             // ค่าลดหย่อนกลุ่มประกัน เงินออม และการลงทุน
             let total_investment_deductions = 0;
-            let retirement_total = 0;
-            let max_retirement_deduction = 0;
-            let thaiesg_total = 0;
-            let max_thaiesg_deduction = 0;
-            insurance_total = 0;
-            let max_insurance_deduction = 0;
+            let retirement_total = 0; // ตัวแปรสำหรับตรวจสอบค่าลดหย่อนกลุ่มเกษียณ
+
+            // Initialize insurance_total and parent_health_insurance to prevent undefined errors
+            let insurance_total = 0;
+            let parent_health_insurance = 0;
 
             if (document.getElementById('has_insurance').checked) {
                 let life_insurance = parseNumber(document.getElementById('life_insurance').value);
@@ -1075,7 +1009,7 @@
                 }
                 insurance_total = Math.min(insurance_total, 100000);
 
-                let parent_health_insurance = parseNumber(document.getElementById('parent_health_insurance').value);
+                parent_health_insurance = parseNumber(document.getElementById('parent_health_insurance').value);
                 if (parent_health_insurance > 15000) {
                     errorMessages.push('เบี้ยประกันสุขภาพบิดามารดาไม่ควรเกิน 15,000 บาท');
                     errorFields.push('parent_health_insurance');
@@ -1083,12 +1017,11 @@
                 parent_health_insurance = Math.min(parent_health_insurance, 15000);
 
                 let pension_insurance = parseNumber(document.getElementById('pension_insurance').value);
-                let pension_limit = total_income * 0.15;
-                if (pension_insurance > pension_limit || pension_insurance > 200000) {
-                    errorMessages.push('เบี้ยประกันชีวิตแบบบำนาญไม่ควรเกิน 15% ของรายได้หรือ 200,000 บาท');
+                if (pension_insurance > 100000) { // Updated to 100,000 บาท as per user request
+                    errorMessages.push('เบี้ยประกันชีวิตแบบบำนาญไม่ควรเกิน 100,000 บาท');
                     errorFields.push('pension_insurance');
                 }
-                pension_insurance = Math.min(pension_insurance, pension_limit, 200000);
+                pension_insurance = Math.min(pension_insurance, 100000);
 
                 let pvd = parseNumber(document.getElementById('pvd').value);
                 let pvd_limit = total_income * 0.15;
@@ -1099,28 +1032,28 @@
                 pvd = Math.min(pvd, pvd_limit, 500000);
 
                 let ssf = parseNumber(document.getElementById('ssf').value);
-                let ssf_limit = total_income * 0.30;
-                if (ssf > ssf_limit || ssf > 200000) {
+                let ssf_limit = Math.min(total_income * 0.30, 200000);
+                if (ssf > ssf_limit) {
                     errorMessages.push('กองทุนรวมเพื่อการออม (SSF) ไม่ควรเกิน 30% ของรายได้หรือ 200,000 บาท');
                     errorFields.push('ssf');
                 }
-                ssf = Math.min(ssf, ssf_limit, 200000);
+                ssf = Math.min(ssf, ssf_limit);
 
                 let rmf = parseNumber(document.getElementById('rmf').value);
-                let rmf_limit = total_income * 0.30;
-                if (rmf > rmf_limit || rmf > 500000) {
+                let rmf_limit = Math.min(total_income * 0.30, 500000);
+                if (rmf > rmf_limit) {
                     errorMessages.push('กองทุนรวมเพื่อการเลี้ยงชีพ (RMF) ไม่ควรเกิน 30% ของรายได้หรือ 500,000 บาท');
                     errorFields.push('rmf');
                 }
-                rmf = Math.min(rmf, rmf_limit, 500000);
+                rmf = Math.min(rmf, rmf_limit);
 
                 let thaiesg = parseNumber(document.getElementById('thaiesg').value);
-                let thaiesg_limit = total_income * 0.30;
-                if (thaiesg > thaiesg_limit || thaiesg > 300000) {
+                let thaiesg_limit = Math.min(total_income * 0.30, 300000);
+                if (thaiesg > thaiesg_limit) {
                     errorMessages.push('กองทุนรวมไทยเพื่อความยั่งยืน (Thai ESG) ไม่ควรเกิน 30% ของรายได้หรือ 300,000 บาท');
                     errorFields.push('thaiesg');
                 }
-                thaiesg = Math.min(thaiesg, thaiesg_limit, 300000);
+                thaiesg = Math.min(thaiesg, thaiesg_limit);
 
                 let social_enterprise = parseNumber(document.getElementById('social_enterprise').value);
                 if (social_enterprise > 100000) {
@@ -1138,35 +1071,17 @@
 
                 // รวมค่าลดหย่อนกลุ่มเกษียณ สูงสุดไม่เกิน 500,000 บาท
                 retirement_total = pension_insurance + pvd + rmf + nsf + ssf;
-                max_retirement_deduction = Math.min(500000, total_income * 0.30);
-                if (retirement_total > max_retirement_deduction) {
-                    errorMessages.push('รวมค่าลดหย่อนกลุ่มเกษียณไม่ควรเกิน 30% ของรายได้หรือ 500,000 บาท');
+                if (retirement_total > 500000) {
+                    errorMessages.push('รวมค่าลดหย่อนกลุ่มเกษียณไม่ควรเกิน 500,000 บาท');
                     errorFields.push('pension_insurance');
                 }
-                retirement_total = Math.min(retirement_total, max_retirement_deduction);
+                retirement_total = Math.min(retirement_total, 500000);
 
-                // Thai ESG Funds
-                thaiesg_total = thaiesg;
-                max_thaiesg_deduction = Math.min(300000, total_income * 0.30);
-                if (thaiesg_total > max_thaiesg_deduction) {
-                    errorMessages.push('กองทุนรวมไทยเพื่อความยั่งยืน (Thai ESG) ไม่ควรเกิน 30% ของรายได้หรือ 300,000 บาท');
-                    errorFields.push('thaiesg');
-                }
-                thaiesg_total = Math.min(thaiesg_total, max_thaiesg_deduction);
-
-                // Life Insurance
-                max_insurance_deduction = 100000;
-
-                total_investment_deductions = insurance_total + health_insurance + parent_health_insurance + retirement_total + thaiesg_total + social_enterprise;
-            } else {
-                // Even if the user didn't check 'has_insurance', we need to calculate max retirement deduction
-                max_retirement_deduction = Math.min(500000, total_income * 0.30);
-                max_thaiesg_deduction = Math.min(300000, total_income * 0.30);
-                max_insurance_deduction = 100000;
+                total_investment_deductions = insurance_total + parent_health_insurance + retirement_total + thaiesg + social_enterprise;
             }
 
             // ค่าลดหย่อนกลุ่มเงินบริจาค
-            total_donation_deductions = 0;
+            let total_donation_deductions = 0;
             if (document.getElementById('has_donation').checked) {
                 let donation = parseNumber(document.getElementById('donation').value);
 
@@ -1183,7 +1098,7 @@
             }
 
             // ค่าลดหย่อนกลุ่มกระตุ้นเศรษฐกิจของรัฐ
-            total_stimulus_deductions = 0;
+            let total_stimulus_deductions = 0;
             if (document.getElementById('has_stimulus').checked) {
                 let easy_ereceipt = parseNumber(document.getElementById('easy_ereceipt').value);
                 if (easy_ereceipt > 50000) {
@@ -1245,76 +1160,6 @@
             if (net_income < 0) net_income = 0;
 
             // คำนวณภาษี
-            before_tax = calculateTaxFromNetIncome(net_income);
-
-            // คำนวณอัตราภาษีที่แท้จริง
-            let effective_tax_rate = 0;
-            if (total_income > 0) {
-                effective_tax_rate = (before_tax / total_income) * 100;
-            }
-
-            // คำนวณเปอร์เซ็นต์การใช้สิทธิลดหย่อนกลุ่มเกษียณ
-            let retirement_deduction_used = retirement_total;
-            let retirement_deduction_percentage = 0;
-            if (max_retirement_deduction > 0) {
-                retirement_deduction_percentage = (retirement_deduction_used / max_retirement_deduction) * 100;
-                if (retirement_deduction_percentage > 100) retirement_deduction_percentage = 100;
-            }
-
-            // คำนวณเปอร์เซ็นต์การใช้สิทธิลดหย่อน Thai ESG
-            let thaiesg_deduction_used = thaiesg_total;
-            let thaiesg_deduction_percentage = 0;
-            if (max_thaiesg_deduction > 0) {
-                thaiesg_deduction_percentage = (thaiesg_deduction_used / max_thaiesg_deduction) * 100;
-                if (thaiesg_deduction_percentage > 100) thaiesg_deduction_percentage = 100;
-            }
-
-            // คำนวณเปอร์เซ็นต์การใช้สิทธิลดหย่อนประกันชีวิต
-            let insurance_deduction_used = insurance_total;
-            let insurance_deduction_percentage = 0;
-            if (max_insurance_deduction > 0) {
-                insurance_deduction_percentage = (insurance_deduction_used / max_insurance_deduction) * 100;
-                if (insurance_deduction_percentage > 100) insurance_deduction_percentage = 100;
-            }
-
-            // แสดงผลใน Result Section
-            document.getElementById('result_total_income').innerText = formatNumber(total_income);
-            document.getElementById('result_expense').innerText = formatNumber(expense);
-            document.getElementById('result_deductions').innerText = formatNumber(total_deductions - expense);
-            document.getElementById('result_net_income').innerText = formatNumber(net_income);
-            document.getElementById('result_tax').innerText = formatNumber(before_tax) + ' บาท';
-            // แสดงอัตราภาษีที่แท้จริง
-            document.getElementById('result_effective_tax_rate').innerText = effective_tax_rate.toFixed(2) + '%';
-
-            // อัพเดต Gauge
-            let gaugeRetirementFill = document.getElementById('gauge_retirement_fill');
-            gaugeRetirementFill.style.width = retirement_deduction_percentage + '%';
-            gaugeRetirementFill.innerText = retirement_deduction_percentage.toFixed(2) + '%';
-
-            let gaugeThaiESGFill = document.getElementById('gauge_thaiesg_fill');
-            gaugeThaiESGFill.style.width = thaiesg_deduction_percentage + '%';
-            gaugeThaiESGFill.innerText = thaiesg_deduction_percentage.toFixed(2) + '%';
-
-            let gaugeInsuranceFill = document.getElementById('gauge_insurance_fill');
-            gaugeInsuranceFill.style.width = insurance_deduction_percentage + '%';
-            gaugeInsuranceFill.innerText = insurance_deduction_percentage.toFixed(2) + '%';
-
-            // ตรวจสอบว่าผู้ใช้สามารถลดหย่อนได้เพิ่มหรือไม่
-            let investmentButton = document.getElementById('investment_button');
-            if (retirement_deduction_percentage < 100 || thaiesg_deduction_percentage < 100 || insurance_deduction_percentage < 100) {
-                investmentButton.style.display = 'block';
-            } else {
-                investmentButton.style.display = 'none';
-            }
-
-            // แสดง Result Section และซ่อนขั้นตอนอื่น ๆ
-            document.getElementById('step-3').classList.remove('active');
-            document.getElementById('result-section').style.display = 'block';
-            window.scrollTo(0, 0);
-        }
-
-        // ฟังก์ชันสำหรับคำนวณภาษีจากเงินได้สุทธิ
-        function calculateTaxFromNetIncome(net_income) {
             let tax = 0;
             if (net_income <= 150000) {
                 tax = 0;
@@ -1333,7 +1178,107 @@
             } else {
                 tax = ((net_income - 5000000) * 0.35) + 1265000;
             }
-            return tax;
+
+            // คำนวณอัตราภาษีที่แท้จริง
+            let effective_tax_rate = 0;
+            if (total_income > 0) {
+                effective_tax_rate = (tax / total_income) * 100;
+            }
+
+            // Calculate recommended investment amounts
+            // Calculate maximum recommended amounts based on income for SSF, RMF, Thai ESG
+            let ssf_limit = Math.min(total_income * 0.30, 200000); // SSF: 30% of income, max 200,000
+            let rmf_limit = Math.min(total_income * 0.30, 500000); // RMF: 30% of income, max 500,000
+            let thaiesg_limit = Math.min(total_income * 0.30, 300000); // Thai ESG: 30% of income, max 300,000
+
+            // Current investments
+            let current_ssf = parseNumber(document.getElementById('ssf').value) || 0;
+            let current_rmf = parseNumber(document.getElementById('rmf').value) || 0;
+            let current_thaiesg = parseNumber(document.getElementById('thaiesg').value) || 0;
+
+            // Calculate remaining allowance for SSF and RMF combined
+            let combined_limit = 500000;
+            let remaining_allowance = combined_limit - current_ssf - current_rmf;
+
+            // Ensure remaining_allowance is not negative
+            remaining_allowance = Math.max(0, remaining_allowance);
+
+            // Recommend up to remaining_allowance in SSF and RMF independently
+            let recommended_ssf = Math.min(ssf_limit - current_ssf, remaining_allowance);
+            let recommended_rmf = Math.min(rmf_limit - current_rmf, remaining_allowance);
+
+            // Ensure recommendations are not negative
+            recommended_ssf = Math.max(0, recommended_ssf);
+            recommended_rmf = Math.max(0, recommended_rmf);
+
+            // Calculate recommended_thaiesg
+            let recommended_thaiesg = Math.max(0, Math.min(thaiesg_limit - current_thaiesg, total_income * 0.30 - current_thaiesg));
+
+            // แสดงผลใน Result Section
+            document.getElementById('result_total_income').innerText = formatNumber(total_income);
+            document.getElementById('result_expense').innerText = formatNumber(expense);
+            document.getElementById('result_deductions').innerText = formatNumber(total_deductions - expense);
+            document.getElementById('result_net_income').innerText = formatNumber(net_income);
+            document.getElementById('result_tax').innerText = formatNumber(tax) + ' บาท';
+            // แสดงอัตราภาษีที่แท้จริง
+            document.getElementById('result_effective_tax_rate').innerText = effective_tax_rate.toFixed(2) + '%';
+            
+            // Update recommended investments display
+            // Use updateInvestmentDisplay() to handle color changes
+            updateInvestmentDisplay('max_ssf', recommended_ssf);
+            updateInvestmentDisplay('max_rmf', recommended_rmf);
+            updateInvestmentDisplay('max_thaiesg', recommended_thaiesg);
+
+            // Update stepper to step 4
+            setActiveStep(4);
+
+            // แสดง Result Section และซ่อนขั้นตอนอื่น ๆ
+            showStep(4);
+        } // <-- Closing brace for calculateTax
+
+        // ฟังก์ชันสำหรับอัปเดตค่าลดหย่อนกลุ่มเกษียณแบบเรียลไทม์
+        function updateRetirementDeductions() {
+            let ssf = parseNumber(document.getElementById('ssf').value) || 0;
+            let rmf = parseNumber(document.getElementById('rmf').value) || 0;
+            let pension_insurance = parseNumber(document.getElementById('pension_insurance').value) || 0;
+            let pvd = parseNumber(document.getElementById('pvd').value) || 0;
+            let nsf = parseNumber(document.getElementById('nsf').value) || 0;
+
+            let retirement_total = ssf + rmf + pension_insurance + pvd + nsf;
+
+            // Calculate remaining retirement deductions
+            let remaining_retirement = 500000 - retirement_total;
+
+            // Ensure remaining_retirement is not negative
+            remaining_retirement = Math.max(0, remaining_retirement);
+
+            // Calculate remaining allowance
+            let combined_limit = 500000;
+            let remaining_allowance = combined_limit - ssf - rmf;
+
+            // Ensure remaining_allowance is not negative
+            remaining_allowance = Math.max(0, remaining_allowance);
+
+            // Recommend up to remaining_allowance in SSF and RMF independently
+            let ssf_limit = Math.min(total_income * 0.30, 200000);
+            let rmf_limit = Math.min(total_income * 0.30, 500000);
+
+            let recommended_ssf = Math.min(ssf_limit - ssf, remaining_allowance);
+            let recommended_rmf = Math.min(rmf_limit - rmf, remaining_allowance);
+
+            // Ensure recommendations are not negative
+            recommended_ssf = Math.max(0, recommended_ssf);
+            recommended_rmf = Math.max(0, recommended_rmf);
+
+            // Calculate recommended_thaiesg
+            let thaiesg = parseNumber(document.getElementById('thaiesg').value) || 0;
+            let thaiesg_limit = Math.min(total_income * 0.30, 300000);
+            let recommended_thaiesg = Math.max(0, Math.min(thaiesg_limit - thaiesg, total_income * 0.30 - thaiesg));
+
+            // Update the display in the result section with conditional formatting
+            updateInvestmentDisplay('max_ssf', recommended_ssf);
+            updateInvestmentDisplay('max_rmf', recommended_rmf);
+            updateInvestmentDisplay('max_thaiesg', recommended_thaiesg);
         }
 
         // ฟังก์ชันสำหรับแสดง Modal ข้อผิดพลาด
@@ -1369,9 +1314,9 @@
 
         // ฟังก์ชันสำหรับแก้ไขข้อมูล
         function editData() {
-            document.getElementById('result-section').style.display = 'none';
-            document.getElementById('step-1').classList.add('active');
-            window.scrollTo(0, 0);
+            document.getElementById('step-4').style.display = 'none';
+            setActiveStep(1);
+            showStep(1);
         }
 
         // ฟังก์ชันสำหรับเริ่มใหม่
@@ -1379,222 +1324,127 @@
             location.reload();
         }
 
-        // ฟังก์ชันสำหรับไปยังส่วนการปรับค่าลดหย่อน
-        function goToAdjustmentSection() {
-            document.getElementById('result-section').style.display = 'none';
-            document.getElementById('adjustment-section').style.display = 'block';
-            window.scrollTo(0, 0);
+        // ฟังก์ชันสำหรับไปยังส่วนการลงทุน
+        function goToInvestmentSection() {
+            document.getElementById('step-4').style.display = 'none';
+            setActiveStep(3);
+            showStep(3);
 
-            // Initialize Adjustment Section
-            initializeAdjustmentSection();
+            // เปิดส่วนค่าลดหย่อนการลงทุน
+            if (!document.getElementById('has_insurance').checked) {
+                document.getElementById('has_insurance').checked = true;
+                document.getElementById('insurance_section').style.display = 'block';
+            }
 
-            // Display before tax amount
-            document.getElementById('before_tax_amount').innerText = formatNumber(before_tax) + ' บาท';
-        }
-
-        // ฟังก์ชันสำหรับคำนวณภาษีหลังปรับ
-        function calculateAdjustedTax() {
-            // Get original values
-            let original_ssf = parseNumber(document.getElementById('ssf').value);
-            let original_rmf = parseNumber(document.getElementById('rmf').value);
-            let original_thaiesg = parseNumber(document.getElementById('thaiesg').value);
-            let original_life_insurance = parseNumber(document.getElementById('life_insurance').value);
-
-            // Get adjusted values
-            let adjusted_ssf = parseNumber(document.getElementById('adjust_ssf_value').value);
-            let adjusted_rmf = parseNumber(document.getElementById('adjust_rmf_value').value);
-            let adjusted_thaiesg = parseNumber(document.getElementById('adjust_thaiesg_value').value);
-            let adjusted_life_insurance = parseNumber(document.getElementById('adjust_life_insurance_value').value);
-
-            // Calculate maximum allowable values
-            let ssf_limit = Math.min(total_income * 0.30, 200000);
-            let ssf_remaining = ssf_limit - original_ssf;
-            if (ssf_remaining < 0) ssf_remaining = 0;
-
-            let rmf_limit = Math.min(total_income * 0.30, 500000);
-            let rmf_remaining = rmf_limit - original_rmf;
-            if (rmf_remaining < 0) rmf_remaining = 0;
-
-            let retirement_limit = Math.min(total_income * 0.30, 500000);
-            let other_retirement = parseNumber(document.getElementById('pension_insurance').value) + parseNumber(document.getElementById('pvd').value) + parseNumber(document.getElementById('nsf').value);
-            let retirement_remaining = retirement_limit - (original_ssf + original_rmf + other_retirement);
-            if (retirement_remaining < 0) retirement_remaining = 0;
-
-            let adjusted_retirement_total = adjusted_ssf + adjusted_rmf + other_retirement;
-            if (adjusted_retirement_total > retirement_limit) adjusted_retirement_total = retirement_limit;
-
-            let thaiesg_limit = Math.min(total_income * 0.30, 300000);
-            let thaiesg_remaining = thaiesg_limit - original_thaiesg;
-            if (thaiesg_remaining < 0) thaiesg_remaining = 0;
-
-            let life_insurance_limit = 100000;
-            let life_insurance_remaining = life_insurance_limit - original_life_insurance;
-            if (life_insurance_remaining < 0) life_insurance_remaining = 0;
-
-            // Update maximum values for sliders and inputs
-            document.getElementById('adjust_ssf').max = original_ssf + ssf_remaining;
-            document.getElementById('adjust_rmf').max = original_rmf + rmf_remaining;
-            document.getElementById('adjust_thaiesg').max = original_thaiesg + thaiesg_remaining;
-            document.getElementById('adjust_life_insurance').max = original_life_insurance + life_insurance_remaining;
-
-            // Ensure adjusted values do not exceed maximums
-            if (adjusted_ssf > original_ssf + ssf_remaining) adjusted_ssf = original_ssf + ssf_remaining;
-            if (adjusted_rmf > original_rmf + rmf_remaining) adjusted_rmf = original_rmf + rmf_remaining;
-            if (adjusted_thaiesg > original_thaiesg + thaiesg_remaining) adjusted_thaiesg = original_thaiesg + thaiesg_remaining;
-            if (adjusted_life_insurance > original_life_insurance + life_insurance_remaining) adjusted_life_insurance = original_life_insurance + life_insurance_remaining;
-
-            // Update sliders if necessary
-            document.getElementById('adjust_ssf').value = adjusted_ssf;
-            document.getElementById('adjust_rmf').value = adjusted_rmf;
-            document.getElementById('adjust_thaiesg').value = adjusted_thaiesg;
-            document.getElementById('adjust_life_insurance').value = adjusted_life_insurance;
-
-            // Update remaining amounts
-            document.getElementById('ssf_remaining_amount').innerText = formatNumber(ssf_limit - adjusted_ssf) + ' บาท';
-            document.getElementById('rmf_remaining_amount').innerText = formatNumber(rmf_limit - adjusted_rmf) + ' บาท';
-            document.getElementById('thaiesg_remaining_amount').innerText = formatNumber(thaiesg_limit - adjusted_thaiesg) + ' บาท';
-            document.getElementById('life_insurance_remaining_amount').innerText = formatNumber(life_insurance_limit - adjusted_life_insurance) + ' บาท';
-
-            // Recalculate total investment deductions
-            let adjusted_total_investment_deductions = insurance_total + parseNumber(document.getElementById('health_insurance').value) + parseNumber(document.getElementById('parent_health_insurance').value) + parseNumber(document.getElementById('social_enterprise').value);
-            adjusted_total_investment_deductions += adjusted_retirement_total + adjusted_thaiesg + adjusted_life_insurance;
-
-            let adjusted_total_deductions = expense + total_personal_deductions + adjusted_total_investment_deductions + total_stimulus_deductions + total_donation_deductions;
-
-            // Adjusted net income
-            let adjusted_net_income = total_income - adjusted_total_deductions;
-            if (adjusted_net_income < 0) adjusted_net_income = 0;
-
-            // Calculate adjusted tax
-            let adjusted_tax = calculateTaxFromNetIncome(adjusted_net_income);
-
-            after_tax = adjusted_tax;
-
-            // Display adjusted tax amount
-            document.getElementById('after_tax_amount').innerText = formatNumber(after_tax) + ' บาท';
-
-            // Update colors
-            let taxDifference = before_tax - after_tax;
-            let afterTaxElement = document.getElementById('after_tax_amount');
-            if (taxDifference > 0) {
-                afterTaxElement.classList.remove('tax-increase');
-                afterTaxElement.classList.add('tax-decrease');
-            } else if (taxDifference < 0) {
-                afterTaxElement.classList.remove('tax-decrease');
-                afterTaxElement.classList.add('tax-increase');
-            } else {
-                afterTaxElement.classList.remove('tax-increase', 'tax-decrease');
+            // เลื่อนไปยังช่องกรอก SSF
+            const ssfField = document.getElementById('ssf');
+            if (ssfField) {
+                ssfField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                ssfField.focus();
             }
         }
 
-        // Function to update adjustment values when sliders or inputs change
-        function updateAdjustmentValues() {
-            // Synchronize sliders and input fields
-            document.getElementById('adjust_ssf_value').value = formatNumber(parseNumber(document.getElementById('adjust_ssf').value));
-            document.getElementById('adjust_rmf_value').value = formatNumber(parseNumber(document.getElementById('adjust_rmf').value));
-            document.getElementById('adjust_thaiesg_value').value = formatNumber(parseNumber(document.getElementById('adjust_thaiesg').value));
-            document.getElementById('adjust_life_insurance_value').value = formatNumber(parseNumber(document.getElementById('adjust_life_insurance').value));
+        // ฟังก์ชันสำหรับอัปเดตการแนะนำการลงทุน
+        function updateRecommendedInvestments() {
+            let ssf = parseNumber(document.getElementById('ssf').value) || 0;
+            let rmf = parseNumber(document.getElementById('rmf').value) || 0;
+            let thaiesg = parseNumber(document.getElementById('thaiesg').value) || 0;
 
-            // Recalculate adjusted tax
-            calculateAdjustedTax();
+            // Calculate remaining allowance for SSF and RMF combined
+            let combined_limit = 500000;
+            let remaining_allowance = combined_limit - ssf - rmf;
+
+            // Ensure remaining_allowance is not negative
+            remaining_allowance = Math.max(0, remaining_allowance);
+
+            // Recommend up to remaining_allowance in SSF and RMF independently
+            let ssf_limit = Math.min(total_income * 0.30, 200000);
+            let rmf_limit = Math.min(total_income * 0.30, 500000);
+
+            let recommended_ssf = Math.min(ssf_limit - ssf, remaining_allowance);
+            let recommended_rmf = Math.min(rmf_limit - rmf, remaining_allowance);
+
+            // Ensure recommendations are not negative
+            recommended_ssf = Math.max(0, recommended_ssf);
+            recommended_rmf = Math.max(0, recommended_rmf);
+
+            // Calculate recommended_thaiesg
+            let thaiesg_limit = Math.min(total_income * 0.30, 300000);
+            let recommended_thaiesg = Math.max(0, Math.min(thaiesg_limit - thaiesg, total_income * 0.30 - thaiesg));
+
+            // Update the display in the result section with conditional formatting
+            updateInvestmentDisplay('max_ssf', recommended_ssf);
+            updateInvestmentDisplay('max_rmf', recommended_rmf);
+            updateInvestmentDisplay('max_thaiesg', recommended_thaiesg);
         }
 
-        // Function to initialize Adjustment Section
-        function initializeAdjustmentSection() {
-            // Get current values
-            let ssf_current = parseNumber(document.getElementById('ssf').value);
-            let rmf_current = parseNumber(document.getElementById('rmf').value);
-            let thaiesg_current = parseNumber(document.getElementById('thaiesg').value);
-            let life_insurance_current = parseNumber(document.getElementById('life_insurance').value);
-
-            // Set values in sliders and inputs
-            document.getElementById('adjust_ssf').value = ssf_current;
-            document.getElementById('adjust_ssf_value').value = formatNumber(ssf_current);
-            document.getElementById('adjust_rmf').value = rmf_current;
-            document.getElementById('adjust_rmf_value').value = formatNumber(rmf_current);
-            document.getElementById('adjust_thaiesg').value = thaiesg_current;
-            document.getElementById('adjust_thaiesg_value').value = formatNumber(thaiesg_current);
-            document.getElementById('adjust_life_insurance').value = life_insurance_current;
-            document.getElementById('adjust_life_insurance_value').value = formatNumber(life_insurance_current);
-
-            // Recalculate adjusted tax
-            calculateAdjustedTax();
+        // ฟังก์ชันสำหรับอัปเดตการแสดงผลการลงทุน
+        function updateInvestmentDisplay(elementId, amount) {
+            const element = document.getElementById(elementId);
+            if (elementId === 'max_ssf' || elementId === 'max_rmf' || elementId === 'max_thaiesg') {
+                if (amount <= 0) {
+                    element.innerText = 'ไม่สามารถซื้อเพิ่มได้';
+                    element.style.color = 'red';
+                } else {
+                    element.innerText = formatNumber(amount) + ' บาท';
+                    element.style.color = 'green';
+                }
+            }
         }
 
-        // Function to apply adjustments
-        function applyAdjustments() {
-            // Update values in main form
-            document.getElementById('ssf').value = formatNumber(parseNumber(document.getElementById('adjust_ssf_value').value));
-            document.getElementById('rmf').value = formatNumber(parseNumber(document.getElementById('adjust_rmf_value').value));
-            document.getElementById('thaiesg').value = formatNumber(parseNumber(document.getElementById('adjust_thaiesg_value').value));
-            document.getElementById('life_insurance').value = formatNumber(parseNumber(document.getElementById('adjust_life_insurance_value').value));
-
-            // Recalculate tax
-            calculateTax();
-
-            // Hide Adjustment Section
-            document.getElementById('adjustment-section').style.display = 'none';
-
-            // Show Result Section
-            document.getElementById('result-section').style.display = 'block';
-            window.scrollTo(0, 0);
-        }
-
-        // Function to cancel adjustments
-        function cancelAdjustments() {
-            document.getElementById('adjustment-section').style.display = 'none';
-            document.getElementById('result-section').style.display = 'block';
-            window.scrollTo(0, 0);
-        }
-
-        // Add event listeners for sliders and input fields
-        function addAdjustmentEventListeners() {
-            let inputs = ['adjust_ssf', 'adjust_rmf', 'adjust_thaiesg', 'adjust_life_insurance'];
-            inputs.forEach(function(id) {
-                let slider = document.getElementById(id);
-                let inputField = document.getElementById(id + '_value');
-
-                // When slider changes
-                slider.addEventListener('input', function() {
-                    inputField.value = formatNumber(parseNumber(this.value));
-                    updateAdjustmentValues();
-                });
-
-                // When input field changes
-                inputField.addEventListener('input', function() {
-                    let value = parseNumber(this.value);
-                    if (isNaN(value) || value < 0) {
-                        value = 0;
-                    }
-                    slider.value = value;
-                    updateAdjustmentValues();
-                });
+        // ฟังก์ชันสำหรับการตั้งค่า active step ใน stepper
+        function setActiveStep(stepNumber) {
+            const stepperSteps = document.querySelectorAll('.stepper .stepper-step');
+            stepperSteps.forEach(function(step) {
+                if (parseInt(step.getAttribute('data-step')) === stepNumber) {
+                    step.classList.add('active');
+                } else {
+                    step.classList.remove('active');
+                }
             });
         }
 
-        // Add commas while typing in input fields
-        function addCommaEventToAdjustmentInputs() {
-            let inputFields = ['adjust_ssf_value', 'adjust_rmf_value', 'adjust_thaiesg_value', 'adjust_life_insurance_value'];
-            inputFields.forEach(function(id) {
-                let input = document.getElementById(id);
-                input.addEventListener('input', function(e) {
-                    let cursorPosition = this.selectionStart;
-                    let value = this.value.replace(/,/g, '');
-                    if (value === '') {
-                        this.value = '';
-                        return;
-                    }
-                    if (!isNaN(value)) {
-                        let formattedValue = formatNumber(parseFloat(value));
-                        this.value = formattedValue;
-                        // Adjust cursor position
-                        this.selectionEnd = this.value.length;
-                    } else {
-                        this.value = this.value.substring(0, cursorPosition - 1) + this.value.substring(cursorPosition);
-                        this.selectionEnd = cursorPosition - 1;
-                    }
-                });
+        // ฟังก์ชันสำหรับนำทางไปยังขั้นตอนที่เลือก
+        function navigateToStep(stepNumber) {
+            // Hide all step contents
+            document.querySelectorAll('.container .step-content').forEach(function(step) {
+                step.classList.remove('active');
+                step.style.display = 'none';
             });
+
+            // Show the selected step content
+            if (stepNumber === 4) {
+                document.getElementById('step-4').style.display = 'block';
+                document.getElementById('step-4').classList.add('active');
+            } else {
+                document.getElementById(`step-${stepNumber}`).style.display = 'block';
+                document.getElementById(`step-${stepNumber}`).classList.add('active');
+            }
+
+            // Update stepper active state
+            setActiveStep(stepNumber);
+
+            // Scroll to top smoothly
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // ฟังก์ชันสำหรับแสดงขั้นตอน
+        function showStep(stepNumber) {
+            // Hide all step contents
+            document.querySelectorAll('.container .step-content').forEach(function(step) {
+                step.classList.remove('active');
+                step.style.display = 'none';
+            });
+
+            // Show the selected step content
+            document.getElementById(`step-${stepNumber}`).style.display = 'block';
+            document.getElementById(`step-${stepNumber}`).classList.add('active');
+
+            // Update stepper active state
+            setActiveStep(stepNumber);
+
+            // Scroll to top smoothly
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     </script>
 
