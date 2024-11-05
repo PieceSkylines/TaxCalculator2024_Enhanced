@@ -1,5 +1,6 @@
 // Variable declarations
 let total_income = 0;
+let monthly_income = 0; // Add monthly_income variable
 let expense = 0;
 const retirementFields = ['pension_insurance', 'pvd', 'rmf', 'nsf', 'ssf'];
 let incomeTypeCheckboxes = null;
@@ -87,15 +88,17 @@ function nextStep(currentStep) {
                 document.getElementById('annual_income_error').innerText = '';
             }
             total_income = annual_income;
+            monthly_income = annual_income / 12; // Calculate monthly income
         } else if (incomeType === 'monthly') {
-            let monthly_income = parseNumber(document.getElementById('monthly_income').value);
-            if (monthly_income === 0) {
+            let monthly_income_input = parseNumber(document.getElementById('monthly_income').value);
+            if (monthly_income_input === 0) {
                 document.getElementById('monthly_income_error').innerText = 'กรุณากรอกรายได้ต่อเดือนของคุณ';
                 return;
             } else {
                 document.getElementById('monthly_income_error').innerText = '';
             }
             let bonus_income = parseNumber(document.getElementById('bonus_income').value);
+            monthly_income = monthly_income_input; // Set monthly income
             total_income = (monthly_income * 12) + bonus_income;
         }
 
@@ -125,16 +128,143 @@ function nextStep(currentStep) {
     }
 }
 
-// Function to go back to the previous step
-function prevStep(currentStep) {
-    if (currentStep === 2) {
-        setActiveStep(1);
-        showStep(1);
-    } else if (currentStep === 3) {
-        setActiveStep(2);
-        showStep(2);
+// Function to calculate Social Security contribution
+function calculateSocialSecurity() {
+    let social_security = 0;
+    if (document.getElementById('has_social_security').checked) {
+        // Calculate as 5% of monthly income, max 750 baht per month
+        let monthly_contribution = monthly_income * 0.05;
+        monthly_contribution = Math.min(monthly_contribution, 750);
+        social_security = monthly_contribution * 12; // Annual contribution
+        social_security = Math.min(social_security, 9000); // Max 9,000 baht per year
+        // Display the calculated value
+        document.getElementById('social_security').value = formatNumber(social_security);
+    } else {
+        document.getElementById('social_security').value = '';
     }
 }
+
+// Modify the window.onload function to add event listener
+window.onload = function() {
+    // Initialize incomeTypeCheckboxes
+    incomeTypeCheckboxes = document.querySelectorAll('input[name="income_type"]');
+
+    // Attach event listeners to number fields
+    let numberFields = [
+        'annual_income', 'monthly_income', 'bonus_income', 'other_income',
+        // Remove 'social_security' from here since it's auto-calculated
+        'life_insurance', 'health_insurance', 'parent_health_insurance', 'pension_insurance',
+        'ssf', 'rmf', 'pvd', 'thaiesg', 'social_enterprise', 'nsf',
+        'home_loan_interest', 'donation', 'donation_education', 'donation_political',
+        'easy_ereceipt', 'local_travel', 'new_home'
+    ];
+
+    numberFields.forEach(function(id) {
+        addCommaEvent(id);
+        let input = document.getElementById(id);
+        if (input) {
+            input.addEventListener('focus', function() {
+                if (this.value === '0') {
+                    this.value = '';
+                }
+            });
+            input.addEventListener('blur', function() {
+                if (this.value === '') {
+                    this.value = '0';
+                }
+            });
+        }
+    });
+
+    // Handling income type selection
+    incomeTypeCheckboxes.forEach(function(checkbox) {
+        checkbox.addEventListener('change', function() {
+            incomeTypeCheckboxes.forEach(function(box) {
+                if (box !== this) {
+                    box.checked = false;
+                }
+            }, this);
+
+            // Hide both income sections first
+            document.getElementById('annual_income_section').style.display = 'none';
+            document.getElementById('monthly_income_section').style.display = 'none';
+
+            if (this.value === 'annual' && this.checked) {
+                document.getElementById('annual_income_section').style.display = 'block';
+            } else if (this.value === 'monthly' && this.checked) {
+                document.getElementById('monthly_income_section').style.display = 'block';
+            }
+        });
+    });
+
+    // Event listener for "Other Income" checkbox
+    document.getElementById('has_other_income').addEventListener('change', function() {
+        document.getElementById('other_income_section').style.display = this.checked ? 'block' : 'none';
+    });
+
+    // Event listener for "Do you contribute to Social Security?" checkbox
+    document.getElementById('has_social_security').addEventListener('change', function() {
+        if (this.checked) {
+            document.getElementById('social_security_section').style.display = 'block';
+            calculateSocialSecurity(); // Calculate and display Social Security contribution
+        } else {
+            document.getElementById('social_security_section').style.display = 'none';
+            document.getElementById('social_security').value = '';
+        }
+    });
+
+    // Recalculate Social Security when income changes
+    document.getElementById('monthly_income').addEventListener('input', function() {
+        let incomeType = document.querySelector('input[name="income_type"]:checked').value;
+        if (incomeType === 'monthly') {
+            monthly_income = parseNumber(this.value) || 0;
+            calculateSocialSecurity();
+        }
+    });
+
+    document.getElementById('annual_income').addEventListener('input', function() {
+        let incomeType = document.querySelector('input[name="income_type"]:checked').value;
+        if (incomeType === 'annual') {
+            let annual_income = parseNumber(this.value) || 0;
+            monthly_income = annual_income / 12;
+            calculateSocialSecurity();
+        }
+    });
+
+    // Populate children options
+    populateChildrenOptions();
+
+    // Event listeners for additional deduction sections
+    document.getElementById('has_insurance').addEventListener('change', function() {
+        document.getElementById('insurance_section').style.display = this.checked ? 'block' : 'none';
+        updateRecommendedInvestments();
+    });
+    document.getElementById('has_donation').addEventListener('change', function() {
+        document.getElementById('donation_section').style.display = this.checked ? 'block' : 'none';
+        updateRecommendedInvestments();
+    });
+    document.getElementById('has_stimulus').addEventListener('change', function() {
+        document.getElementById('stimulus_section').style.display = this.checked ? 'block' : 'none';
+        updateRecommendedInvestments();
+    });
+
+    // Event listeners for retirement deduction fields
+    retirementFields.forEach(function(field) {
+        let elem = document.getElementById(field);
+        if (elem) {
+            elem.addEventListener('input', updateRetirementDeductions);
+        }
+    });
+
+    // Event listeners for stepper steps
+    const stepperSteps = document.querySelectorAll('.stepper .stepper-step');
+    stepperSteps.forEach(function(step) {
+        step.addEventListener('click', function() {
+            const targetStep = parseInt(this.getAttribute('data-step'));
+            navigateToStep(targetStep);
+        });
+    });
+};
 
 // Function to calculate tax
 function calculateTax() {
@@ -191,12 +321,11 @@ function calculateTax() {
     let disabled_allowance = disabled_persons * 60000;
 
     // Social security
-    let social_security = parseNumber(document.getElementById('social_security').value);
-    if (social_security > 9000) {
-        errorMessages.push('เงินสมทบประกันสังคมไม่ควรเกิน 9,000 บาท');
-        errorFields.push('social_security');
+    let social_security = 0;
+    if (document.getElementById('has_social_security').checked) {
+        social_security = parseNumber(document.getElementById('social_security').value);
+        // No need to validate since it's auto-calculated
     }
-    social_security = Math.min(social_security, 9000);
 
     let total_personal_deductions = personal_allowance + spouse_allowance + child_allowance + parents_allowance + disabled_allowance + social_security;
 
@@ -659,95 +788,3 @@ function populateChildrenOptions() {
         }
     }
 }
-
-// Code that runs when the window loads
-window.onload = function() {
-    // Initialize incomeTypeCheckboxes
-    incomeTypeCheckboxes = document.querySelectorAll('input[name="income_type"]');
-
-    // Attach event listeners to number fields
-    let numberFields = [
-        'annual_income', 'monthly_income', 'bonus_income', 'other_income', 'social_security',
-        'life_insurance', 'health_insurance', 'parent_health_insurance', 'pension_insurance',
-        'ssf', 'rmf', 'pvd', 'thaiesg', 'social_enterprise', 'nsf',
-        'home_loan_interest', 'donation', 'donation_education', 'donation_political',
-        'easy_ereceipt', 'local_travel', 'new_home'
-    ];
-
-    numberFields.forEach(function(id) {
-        addCommaEvent(id);
-        let input = document.getElementById(id);
-        if (input) {
-            input.addEventListener('focus', function() {
-                if (this.value === '0') {
-                    this.value = '';
-                }
-            });
-            input.addEventListener('blur', function() {
-                if (this.value === '') {
-                    this.value = '0';
-                }
-            });
-        }
-    });
-
-    // Handling income type selection
-    incomeTypeCheckboxes.forEach(function(checkbox) {
-        checkbox.addEventListener('change', function() {
-            incomeTypeCheckboxes.forEach(function(box) {
-                if (box !== this) {
-                    box.checked = false;
-                }
-            }, this);
-
-            // Hide both income sections first
-            document.getElementById('annual_income_section').style.display = 'none';
-            document.getElementById('monthly_income_section').style.display = 'none';
-
-            if (this.value === 'annual' && this.checked) {
-                document.getElementById('annual_income_section').style.display = 'block';
-            } else if (this.value === 'monthly' && this.checked) {
-                document.getElementById('monthly_income_section').style.display = 'block';
-            }
-        });
-    });
-
-    // Event listener for "Other Income" checkbox
-    document.getElementById('has_other_income').addEventListener('change', function() {
-        document.getElementById('other_income_section').style.display = this.checked ? 'block' : 'none';
-    });
-
-    // Populate children options
-    populateChildrenOptions();
-
-    // Event listeners for additional deduction sections
-    document.getElementById('has_insurance').addEventListener('change', function() {
-        document.getElementById('insurance_section').style.display = this.checked ? 'block' : 'none';
-        updateRecommendedInvestments();
-    });
-    document.getElementById('has_donation').addEventListener('change', function() {
-        document.getElementById('donation_section').style.display = this.checked ? 'block' : 'none';
-        updateRecommendedInvestments();
-    });
-    document.getElementById('has_stimulus').addEventListener('change', function() {
-        document.getElementById('stimulus_section').style.display = this.checked ? 'block' : 'none';
-        updateRecommendedInvestments();
-    });
-
-    // Event listeners for retirement deduction fields
-    retirementFields.forEach(function(field) {
-        let elem = document.getElementById(field);
-        if (elem) {
-            elem.addEventListener('input', updateRetirementDeductions);
-        }
-    });
-
-    // Event listeners for stepper steps
-    const stepperSteps = document.querySelectorAll('.stepper .stepper-step');
-    stepperSteps.forEach(function(step) {
-        step.addEventListener('click', function() {
-            const targetStep = parseInt(this.getAttribute('data-step'));
-            navigateToStep(targetStep);
-        });
-    });
-};
