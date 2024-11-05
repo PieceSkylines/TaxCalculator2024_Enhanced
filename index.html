@@ -48,11 +48,12 @@
             border: none;
             border-radius: 50px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, transform 0.2s;
             font-family: 'Kanit', sans-serif; /* เพิ่มฟอนต์ให้ปุ่ม */
         }
         .landing-page button:hover {
             background-color: #e0e0e0;
+            transform: scale(1.05);
         }
         /* Container Styles */
         .container {
@@ -60,7 +61,8 @@
             margin: 30px auto;
             background-color: #ffffff;
             padding: 30px;
-            border-radius: 8px;
+            border-radius: 16px; /* เพิ่มความโค้งมน */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* เพิ่มเงา */
             box-sizing: border-box;
             display: none; /* ซ่อน container โดยเริ่มต้น */
             position: relative;
@@ -103,11 +105,12 @@
             border-radius: 50px;
             font-size: 1.6rem;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, transform 0.2s;
             font-family: 'Kanit', sans-serif; /* เพิ่มฟอนต์ให้ปุ่ม */
         }
         button:hover {
             background-color: #0056b3;
+            transform: scale(1.05);
         }
         .deduction-section {
             margin-top: 30px;
@@ -131,9 +134,12 @@
         }
         .step-content {
             display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
         }
         .step-content.active {
             display: block;
+            opacity: 1;
         }
         .navigation-buttons {
             display: flex;
@@ -141,8 +147,9 @@
             margin-top: 30px;
         }
         .navigation-buttons button {
-            width: 48%;
+            width: 45%;
             font-family: 'Kanit', sans-serif; /* เพิ่มฟอนต์ให้ปุ่มใน navigation */
+            margin: 5px;
         }
         .error {
             color: red;
@@ -190,12 +197,13 @@
             border-radius: 50px;
             font-size: 1.3rem;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, transform 0.2s;
             font-family: 'Kanit', sans-serif;
             width: 100%;
         }
         .investment-button:hover {
             background-color: #e0a800;
+            transform: scale(1.05);
         }
         /* Modal Styles */
         .modal {
@@ -276,10 +284,8 @@
             flex: 1;
             text-align: center;
         }
-        .stepper-step:not(:last-child) {
-            /* margin-right: 20px; */
-        }
         .stepper-step-circle {
+            position: relative;
             width: 30px;
             height: 30px;
             border-radius: 50%;
@@ -288,12 +294,12 @@
             align-items: center;
             justify-content: center;
             margin-bottom: 5px;
-            transition: background-color 0.3s, color 0.3s;
+            transition: background-color 0.3s, color 0.3s, transform 0.3s;
         }
-        .stepper-step.active .stepper-step-circle,
-        .stepper-step:hover .stepper-step-circle {
+        .stepper-step.active .stepper-step-circle {
             background-color: #007bff;
             color: #ffffff;
+            transform: scale(1.2);
         }
         .stepper-step-label {
             font-size: 0.9rem;
@@ -340,12 +346,6 @@
             button {
                 font-size: 1.3rem;
             }
-            .navigation-buttons {
-                flex-direction: column;
-            }
-            .navigation-buttons button {
-                width: 100%;
-            }
             .stepper::before {
                 left: 5%;
                 right: 5%;
@@ -364,7 +364,7 @@
 
     <!-- Main Container -->
     <div class="container" id="main-container">
-        <h1>โปรแกรมคำนวณภาษีเงินได้บุคคลธรรมดา  ปี 2567</h1>
+        <h1>โปรแกรมคำนวณภาษีเงินได้บุคคลธรรมดา ปี 2567</h1>
 
         <!-- Stepper (Progress Gauge) -->
         <div class="stepper" id="stepper">
@@ -570,7 +570,6 @@
             </div>
             
             <!-- Part 3: ค่าลดหย่อนภาษีกลุ่มเงินบริจาค -->
-            <!-- Created by Suntiphab Vareenitisakul, 3031, WB-PIC -->
             <div class="deduction-section section-donation" id="donation_section" style="display: none;">
                 <h3>3. ค่าลดหย่อนภาษีกลุ่มเงินบริจาค</h3>
 
@@ -838,7 +837,6 @@
         }
 
         // ฟังก์ชันสำหรับย้อนกลับไปยังขั้นตอนก่อนหน้า
-        // Created by Suntiphab Vareenitisakul, 3031, WB-PIC
         function prevStep(currentStep) {
             if (currentStep === 2) {
                 setActiveStep(1);
