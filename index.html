@@ -138,10 +138,7 @@
                 </select>
                 <div class="info">ลดหย่อนบุตรบุญธรรมคนละ 30,000 บาท สูงสุดไม่เกิน 3 คน</div>
 
-                <label>เงินสมทบประกันสังคมที่จ่ายจริง (บาท):</label>
-                <input type="text" id="social_security" value="0" inputmode="decimal">
-                <span class="error" id="social_security_error"></span>
-                <div class="info">ลดหย่อนได้ตามที่จ่ายจริง สูงสุดไม่เกิน 9,000 บาท</div>
+                <!-- Removed Social Security Field from here -->
 
                 <label>บิดามารดาของคุณที่อายุมากกว่า 60 ปี และมีรายได้ไม่เกิน 30,000 บาทต่อปี:</label>
                 <div class="checkbox-group">
@@ -188,6 +185,18 @@
             <!-- Part 2: ค่าลดหย่อนภาษีกลุ่มประกัน เงินออม และการลงทุน -->
             <div class="deduction-section section-insurance" id="insurance_section" style="display: none;">
                 <h3>2. ค่าลดหย่อนภาษีกลุ่มประกัน เงินออม และการลงทุน</h3>
+
+                <!-- Added Social Security Checkbox and Section Here -->
+                <div class="checkbox-group">
+                    <input type="checkbox" id="has_social_security">
+                    <label for="has_social_security">คุณส่งเงินสมทบประกันสังคมหรือไม่?</label>
+                </div>
+                <div id="social_security_section" style="display: none;">
+                    <label>เงินสมทบประกันสังคมที่คำนวณได้ (บาท):</label>
+                    <input type="text" id="social_security" readonly>
+                    <div class="info">ระบบจะคำนวณให้โดยอัตโนมัติ (สูงสุดไม่เกิน 9,000 บาทต่อปี)</div>
+                </div>
+                <!-- End of Social Security Section -->
 
                 <label>เบี้ยประกันชีวิตและประกันสะสมทรัพย์ (บาท):</label>
                 <input type="text" id="life_insurance" value="0" inputmode="decimal">
