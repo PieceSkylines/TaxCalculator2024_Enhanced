@@ -5,6 +5,7 @@ let expense = 0;
 const retirementFields = ['pension_insurance', 'pvd', 'rmf', 'nsf', 'ssf'];
 let incomeTypeCheckboxes = null;
 let remaining_retirement_allowance = 0; // Global variable
+let isTaxCalculated = false; // Global variable to track if tax has been calculated
 
 // Function to start the calculator
 function startCalculator() {
@@ -15,7 +16,7 @@ function startCalculator() {
 
 // Function to format numbers with commas
 function formatNumber(num) {
-    return num.toLocaleString('en-US', {maximumFractionDigits: 2, minimumFractionDigits: 0});
+    return num.toLocaleString('en-US', { maximumFractionDigits: 2, minimumFractionDigits: 0 });
 }
 
 // Function to parse numbers from strings with commas
@@ -26,11 +27,21 @@ function parseNumber(str) {
     return 0;
 }
 
+// Function to move to the previous step
+function prevStep(currentStep) {
+    if (currentStep > 1) {
+        // Move to the previous step
+        const previousStep = currentStep - 1;
+        setActiveStep(previousStep);
+        showStep(previousStep);
+    }
+}
+
 // Function to add comma formatting to input fields
 function addCommaEvent(id) {
     let input = document.getElementById(id);
     if (input) {
-        input.addEventListener('input', function(e) {
+        input.addEventListener('input', function (e) {
             let cursorPosition = this.selectionStart;
             let value = this.value.replace(/,/g, '');
             if (value === '') {
@@ -60,71 +71,54 @@ function addCommaEvent(id) {
 
 // Function to move to the next step
 function nextStep(currentStep) {
-    if (currentStep === 1) {
-        // Check if income type is selected
-        let incomeTypeSelected = false;
-        let incomeType = '';
-        incomeTypeCheckboxes.forEach(function(checkbox) {
-            if (checkbox.checked) {
-                incomeTypeSelected = true;
-                incomeType = checkbox.value;
+    if (validateStep(currentStep)) {
+        if (currentStep === 1) {
+            // Perform calculations and updates specific to step 1
+
+            // Get income type
+            let incomeType = '';
+            incomeTypeCheckboxes.forEach(function (checkbox) {
+                if (checkbox.checked) {
+                    incomeType = checkbox.value;
+                }
+            });
+
+            // Get income data
+            if (incomeType === 'annual') {
+                let annual_income = parseNumber(document.getElementById('annual_income').value);
+                total_income = annual_income;
+                monthly_income = annual_income / 12; // Calculate monthly income
+            } else if (incomeType === 'monthly') {
+                let monthly_income_input = parseNumber(document.getElementById('monthly_income').value);
+                let bonus_income = parseNumber(document.getElementById('bonus_income').value) || 0;
+                monthly_income = monthly_income_input; // Set monthly income
+                total_income = (monthly_income * 12) + bonus_income;
             }
-        });
 
-        if (!incomeTypeSelected) {
-            document.getElementById('income_type_error').innerText = 'กรุณาเลือกประเภทของรายได้';
-            return;
-        } else {
-            document.getElementById('income_type_error').innerText = '';
-        }
-
-        // Get income data
-        if (incomeType === 'annual') {
-            let annual_income = parseNumber(document.getElementById('annual_income').value);
-            if (annual_income === 0) {
-                document.getElementById('annual_income_error').innerText = 'กรุณากรอกรายได้ทั้งปีของคุณ';
-                return;
-            } else {
-                document.getElementById('annual_income_error').innerText = '';
+            // Get other income if checkbox is checked
+            let other_income = 0;
+            if (document.getElementById('has_other_income').checked) {
+                other_income = parseNumber(document.getElementById('other_income').value) || 0;
             }
-            total_income = annual_income;
-            monthly_income = annual_income / 12; // Calculate monthly income
-        } else if (incomeType === 'monthly') {
-            let monthly_income_input = parseNumber(document.getElementById('monthly_income').value);
-            if (monthly_income_input === 0) {
-                document.getElementById('monthly_income_error').innerText = 'กรุณากรอกรายได้ต่อเดือนของคุณ';
-                return;
-            } else {
-                document.getElementById('monthly_income_error').innerText = '';
-            }
-            let bonus_income = parseNumber(document.getElementById('bonus_income').value);
-            monthly_income = monthly_income_input; // Set monthly income
-            total_income = (monthly_income * 12) + bonus_income;
+            total_income += other_income;
+
+            // Calculate expense (50% but not more than 100,000 THB)
+            expense = total_income * 0.50;
+            if (expense > 100000) expense = 100000;
+
+            // Display expense
+            document.getElementById('expense_display').innerText = formatNumber(expense);
+
+            // Update stepper to step 2
+            setActiveStep(2);
+
+            // Go to step 2
+            showStep(2);
+        } else if (currentStep === 2) {
+            // Go to step 3
+            setActiveStep(3);
+            showStep(3);
         }
-
-        // Get other income if checkbox is checked
-        let other_income = 0;
-        if (document.getElementById('has_other_income').checked) {
-            other_income = parseNumber(document.getElementById('other_income').value) || 0;
-        }
-        total_income += other_income;
-
-        // Calculate expense (50% but not more than 100,000 THB)
-        expense = total_income * 0.50;
-        if (expense > 100000) expense = 100000;
-
-        // Display expense
-        document.getElementById('expense_display').innerText = formatNumber(expense);
-
-        // Update stepper to step 2
-        setActiveStep(2);
-
-        // Go to step 2
-        showStep(2);
-    } else if (currentStep === 2) {
-        // Go to step 3
-        setActiveStep(3);
-        showStep(3);
     }
 }
 
@@ -145,7 +139,7 @@ function calculateSocialSecurity() {
 }
 
 // Modify the window.onload function to add event listener
-window.onload = function() {
+window.onload = function () {
     // Initialize incomeTypeCheckboxes
     incomeTypeCheckboxes = document.querySelectorAll('input[name="income_type"]');
 
@@ -159,16 +153,16 @@ window.onload = function() {
         'easy_ereceipt', 'local_travel', 'new_home'
     ];
 
-    numberFields.forEach(function(id) {
+    numberFields.forEach(function (id) {
         addCommaEvent(id);
         let input = document.getElementById(id);
         if (input) {
-            input.addEventListener('focus', function() {
+            input.addEventListener('focus', function () {
                 if (this.value === '0') {
                     this.value = '';
                 }
             });
-            input.addEventListener('blur', function() {
+            input.addEventListener('blur', function () {
                 if (this.value === '') {
                     this.value = '0';
                 }
@@ -177,9 +171,9 @@ window.onload = function() {
     });
 
     // Handling income type selection
-    incomeTypeCheckboxes.forEach(function(checkbox) {
-        checkbox.addEventListener('change', function() {
-            incomeTypeCheckboxes.forEach(function(box) {
+    incomeTypeCheckboxes.forEach(function (checkbox) {
+        checkbox.addEventListener('change', function () {
+            incomeTypeCheckboxes.forEach(function (box) {
                 if (box !== this) {
                     box.checked = false;
                 }
@@ -198,12 +192,12 @@ window.onload = function() {
     });
 
     // Event listener for "Other Income" checkbox
-    document.getElementById('has_other_income').addEventListener('change', function() {
+    document.getElementById('has_other_income').addEventListener('change', function () {
         document.getElementById('other_income_section').style.display = this.checked ? 'block' : 'none';
     });
 
     // Event listener for "Do you contribute to Social Security?" checkbox
-    document.getElementById('has_social_security').addEventListener('change', function() {
+    document.getElementById('has_social_security').addEventListener('change', function () {
         if (this.checked) {
             document.getElementById('social_security_section').style.display = 'block';
             calculateSocialSecurity(); // Calculate and display Social Security contribution
@@ -214,7 +208,7 @@ window.onload = function() {
     });
 
     // Recalculate Social Security when income changes
-    document.getElementById('monthly_income').addEventListener('input', function() {
+    document.getElementById('monthly_income').addEventListener('input', function () {
         let incomeType = document.querySelector('input[name="income_type"]:checked').value;
         if (incomeType === 'monthly') {
             monthly_income = parseNumber(this.value) || 0;
@@ -222,7 +216,7 @@ window.onload = function() {
         }
     });
 
-    document.getElementById('annual_income').addEventListener('input', function() {
+    document.getElementById('annual_income').addEventListener('input', function () {
         let incomeType = document.querySelector('input[name="income_type"]:checked').value;
         if (incomeType === 'annual') {
             let annual_income = parseNumber(this.value) || 0;
@@ -235,21 +229,19 @@ window.onload = function() {
     populateChildrenOptions();
 
     // Event listeners for additional deduction sections
-    document.getElementById('has_insurance').addEventListener('change', function() {
+    document.getElementById('has_insurance').addEventListener('change', function () {
         document.getElementById('insurance_section').style.display = this.checked ? 'block' : 'none';
-        updateRecommendedInvestments();
+        updateRetirementDeductions();
     });
-    document.getElementById('has_donation').addEventListener('change', function() {
+    document.getElementById('has_donation').addEventListener('change', function () {
         document.getElementById('donation_section').style.display = this.checked ? 'block' : 'none';
-        updateRecommendedInvestments();
     });
-    document.getElementById('has_stimulus').addEventListener('change', function() {
+    document.getElementById('has_stimulus').addEventListener('change', function () {
         document.getElementById('stimulus_section').style.display = this.checked ? 'block' : 'none';
-        updateRecommendedInvestments();
     });
 
     // Event listeners for retirement deduction fields
-    retirementFields.forEach(function(field) {
+    retirementFields.forEach(function (field) {
         let elem = document.getElementById(field);
         if (elem) {
             elem.addEventListener('input', updateRetirementDeductions);
@@ -258,18 +250,87 @@ window.onload = function() {
 
     // Event listeners for stepper steps
     const stepperSteps = document.querySelectorAll('.stepper .stepper-step');
-    stepperSteps.forEach(function(step) {
-        step.addEventListener('click', function() {
+    stepperSteps.forEach(function (step) {
+        step.addEventListener('click', function () {
             const targetStep = parseInt(this.getAttribute('data-step'));
-            navigateToStep(targetStep);
+
+            // Get current step (the active step)
+            const currentStepElement = document.querySelector('.stepper .stepper-step.active');
+            const currentStep = parseInt(currentStepElement.getAttribute('data-step'));
+
+            if (currentStep === 1 && targetStep !== 1) {
+                // User is on Step 1 and trying to navigate to another step
+                if (validateStep(1)) {
+                    // Validation passed, navigate to target step
+                    navigateToStep(targetStep);
+                } else {
+                    // Validation failed, do not navigate
+                    // The validateStep function already displays validation messages
+                }
+            } else if (!isTaxCalculated && targetStep === 4) {
+                // Prevent navigation to Step 4 before tax is calculated
+                alert('กรุณาคลิกปุ่ม "คำนวณภาษี" เพื่อดูผลการคำนวณ');
+            } else {
+                // Allow navigation
+                navigateToStep(targetStep);
+            }
         });
     });
 };
 
+// Function to validate a specific step
+function validateStep(stepNumber) {
+    if (stepNumber === 1) {
+        // Perform validation for step 1
+
+        // Check if income type is selected
+        let incomeTypeSelected = false;
+        let incomeType = '';
+        incomeTypeCheckboxes.forEach(function (checkbox) {
+            if (checkbox.checked) {
+                incomeTypeSelected = true;
+                incomeType = checkbox.value;
+            }
+        });
+
+        if (!incomeTypeSelected) {
+            document.getElementById('income_type_error').innerText = 'กรุณาเลือกประเภทของรายได้';
+            return false;
+        } else {
+            document.getElementById('income_type_error').innerText = '';
+        }
+
+        // Get income data
+        if (incomeType === 'annual') {
+            let annual_income = parseNumber(document.getElementById('annual_income').value);
+            if (annual_income === 0) {
+                document.getElementById('annual_income_error').innerText = 'กรุณากรอกรายได้ทั้งปีของคุณ';
+                return false;
+            } else {
+                document.getElementById('annual_income_error').innerText = '';
+            }
+        } else if (incomeType === 'monthly') {
+            let monthly_income_input = parseNumber(document.getElementById('monthly_income').value);
+            if (monthly_income_input === 0) {
+                document.getElementById('monthly_income_error').innerText = 'กรุณากรอกรายได้ต่อเดือนของคุณ';
+                return false;
+            } else {
+                document.getElementById('monthly_income_error').innerText = '';
+            }
+        }
+
+        // Validation passed
+        return true;
+    } else {
+        // No validation needed for other steps
+        return true;
+    }
+}
+
 // Function to calculate tax
 function calculateTax() {
     // Clear previous error messages
-    document.querySelectorAll('.error').forEach(function(el) {
+    document.querySelectorAll('.error').forEach(function (el) {
         el.innerText = '';
     });
 
@@ -369,11 +430,11 @@ function calculateTax() {
         parent_health_insurance = Math.min(parent_health_insurance, 15000);
 
         let pension_insurance = parseNumber(document.getElementById('pension_insurance').value);
-        if (pension_insurance > 100000) {
-            errorMessages.push('เบี้ยประกันชีวิตแบบบำนาญไม่ควรเกิน 100,000 บาท');
+        if (pension_insurance > 200000) {
+            errorMessages.push('เบี้ยประกันชีวิตแบบบำนาญไม่ควรเกิน 200,000 บาท');
             errorFields.push('pension_insurance');
         }
-        pension_insurance = Math.min(pension_insurance, 100000);
+        pension_insurance = Math.min(pension_insurance, 200000);
 
         let pvd = parseNumber(document.getElementById('pvd').value);
         let pvd_limit = Math.min(total_income * 0.15, 500000);
@@ -454,7 +515,7 @@ function calculateTax() {
     if (document.getElementById('has_stimulus').checked) {
         let easy_ereceipt = parseNumber(document.getElementById('easy_ereceipt').value);
         if (easy_ereceipt > 50000) {
-            errorMessages.push('Easy e-Receipt 2567 ไม่ควรเกิน 50,000 บาท');
+            errorMessages.push('ช้อปดีมีคืน 2567 ไม่ควรเกิน 50,000 บาท');
             errorFields.push('easy_ereceipt');
         }
         easy_ereceipt = Math.min(easy_ereceipt, 50000);
@@ -586,6 +647,9 @@ function calculateTax() {
     updateInvestmentDisplay('max_rmf', recommended_rmf);
     updateInvestmentDisplay('max_thaiesg', recommended_thaiesg);
 
+    // Set isTaxCalculated to true
+    isTaxCalculated = true;
+
     // Update stepper to step 4
     setActiveStep(4);
 
@@ -636,7 +700,7 @@ function showErrorModal(messages, fields) {
     const errorModal = document.getElementById('errorModal');
     const errorList = document.getElementById('errorList');
     errorList.innerHTML = '';
-    messages.forEach(function(msg) {
+    messages.forEach(function (msg) {
         const li = document.createElement('li');
         li.innerText = msg;
         errorList.appendChild(li);
@@ -718,7 +782,7 @@ function updateInvestmentDisplay(elementId, amount) {
 // Function to set active step in stepper
 function setActiveStep(stepNumber) {
     const stepperSteps = document.querySelectorAll('.stepper .stepper-step');
-    stepperSteps.forEach(function(step) {
+    stepperSteps.forEach(function (step) {
         if (parseInt(step.getAttribute('data-step')) === stepNumber) {
             step.classList.add('active');
         } else {
@@ -730,7 +794,7 @@ function setActiveStep(stepNumber) {
 // Function to navigate to a specific step
 function navigateToStep(stepNumber) {
     // Hide all step contents
-    document.querySelectorAll('.container .step-content').forEach(function(step) {
+    document.querySelectorAll('.container .step-content').forEach(function (step) {
         step.classList.remove('active');
         step.style.display = 'none';
     });
