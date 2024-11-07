@@ -324,7 +324,7 @@ input[type="checkbox"] {
 }
 
 .stepper[data-current-step="2"]::after {
-    width: calc(30% - 10px);
+    width: calc(33.33% - 10px);
 }
 
 .stepper[data-current-step="3"]::after {
