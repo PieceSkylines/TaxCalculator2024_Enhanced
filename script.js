@@ -11,6 +11,7 @@ let isTaxCalculated = false; // Global variable to track if tax has been calcula
 function startCalculator() {
     document.getElementById('landing-page').style.display = 'none';
     document.getElementById('main-container').style.display = 'block';
+    setActiveStep(1); // Add this line to set the first step as active
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -765,7 +766,7 @@ function updateInvestmentDisplay(elementId, amount) {
             element.innerText = 'ไม่สามารถซื้อเพิ่มได้';
             element.style.color = 'red';
         } else {
-            element.innerText = formatNumber(amount) + ' บาท (รวม SSF และ RMF ไม่เกิน ' + formatNumber(remaining_retirement_allowance) + ' บาท)';
+            element.innerText = formatNumber(amount) + ' บาท ';
             element.style.color = 'green';
         }
     } else if (elementId === 'max_thaiesg') {
@@ -781,12 +782,21 @@ function updateInvestmentDisplay(elementId, amount) {
 
 // Function to set active step in stepper
 function setActiveStep(stepNumber) {
+    const stepper = document.getElementById('stepper');
+    stepper.setAttribute('data-current-step', stepNumber);
+
     const stepperSteps = document.querySelectorAll('.stepper .stepper-step');
     stepperSteps.forEach(function (step) {
-        if (parseInt(step.getAttribute('data-step')) === stepNumber) {
+        const stepDataNumber = parseInt(step.getAttribute('data-step'));
+        if (stepDataNumber < stepNumber) {
+            step.classList.add('completed');
+            step.classList.remove('active');
+        } else if (stepDataNumber === stepNumber) {
             step.classList.add('active');
+            step.classList.add('completed');
         } else {
             step.classList.remove('active');
+            step.classList.remove('completed');
         }
     });
 }
