@@ -324,15 +324,15 @@ input[type="checkbox"] {
 }
 
 .stepper[data-current-step="2"]::after {
-    width: calc(33.33% - 10px);
+    width: calc(30% - 10px);
 }
 
 .stepper[data-current-step="3"]::after {
-    width: calc(66.66% - 10px);
+    width: calc(60% - 10px);
 }
 
 .stepper[data-current-step="4"]::after {
-    width: calc(100% - 10px);
+    width: calc(90% - 10px);
 }
 
 .stepper-step {
